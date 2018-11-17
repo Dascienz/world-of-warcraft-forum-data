@@ -17,11 +17,15 @@ import pandas as pd
 import MySQLdb as sql
 import matplotlib.pyplot as plt
 
+#JSON credentials
+login = pd.read_json(os.path.join(os.getcwd(),"db_credentials.json"), typ="series").to_dict()
+
 def connect():
-    conn = sql.connect(host="localhost",
-                       user="root",
-                       passwd="Byleth88$",
-                       db="wow_forums")           
+    #db connection
+    conn = mysql.connect(host=login["host"],
+                     user=login["user"],
+                     passwd=login["passwd"],
+                     db=login["db"])           
     cur = conn.cursor()
     return conn, cur
 
@@ -105,8 +109,8 @@ class Recommender():
         self.length = len(item_arrays)
     
     def cosine_distance(self,x,y):
-        cos = np.dot(x,y) / (np.sqrt(np.dot(x,x)*np.dot(y,y)) + 1e-6)
-        return 1 - cos
+        cos = np.dot(x,y) / (np.sqrt(np.dot(x,x) * np.dot(y,y)) + 1e-9)
+        return 1. - cos
 
     def cosine_similarity(self,item,item_arrays):
         distances = np.zeros(self.length)

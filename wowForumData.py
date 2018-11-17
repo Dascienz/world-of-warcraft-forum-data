@@ -17,11 +17,15 @@ from matplotlib import cm as cm
 The WoW Forum Data is stored in a MySQL database.
 """
 
+#JSON credentials
+login = pd.read_json(os.path.join(os.getcwd(),"db_credentials.json"), typ="series").to_dict()
+
 def connect():
-    conn = sql.connect(host="localhost",
-                       user="root",
-                       passwd="Byleth88$",
-                       db="wow_forums")           
+    #db connection
+    conn = mysql.connect(host=login["host"],
+                     user=login["user"],
+                     passwd=login["passwd"],
+                     db=login["db"])          
     cur = conn.cursor()
     return conn, cur
 
