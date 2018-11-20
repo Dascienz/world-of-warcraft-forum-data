@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import numpy as np
 
 def cosine_distance(x, y):
@@ -12,8 +11,9 @@ def cosine_distance(x, y):
             (float) cosine distance
     """
     
+    epsilon = 1e-9
     a = np.dot(x,y) #numerator
-    b = np.sqrt(np.dot(x,x) * np.dot(y,y)) #denominator
+    b = np.sqrt(np.dot(x,x) * np.dot(y,y)) + epsilon #denominator
     return 1. - (a / b)
 
 def cosine_similarity(iArray, nArrays):
@@ -38,7 +38,8 @@ if __name__=="__main__":
     
     cosineDistances = cosine_similarity(iArray,nArrays)
     
-    print("\nTest array: {}".format(iArray))
-    print("\nList of arrays: {}".format(nArrays))
-    print("\nList of cosine distances: {}".format(cosineDistances))
+    print("\n")
+    print("Test array:\n{}\n".format(iArray))
+    print("List of arrays:\n{}\n".format(nArrays))
+    print("List of cosine distances:\n{}\n".format(cosineDistances))
     

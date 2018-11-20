@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 16 17:30:36 2017
-
-@author: Dascienz
-"""
-
 import numpy as np
 import pandas as pd
 import MySQLdb as sql
